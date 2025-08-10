@@ -13,7 +13,6 @@
       --accent: #6c63ff;
       --success: #28a745;
     }
-
     * {
       margin: 0;
       padding: 0;
@@ -21,13 +20,11 @@
       scroll-behavior: smooth;
       font-family: 'Outfit', sans-serif;
     }
-
     body {
       background-color: var(--bg);
       color: var(--text);
       overflow-x: hidden;
     }
-
     nav {
       position: fixed;
       top: 0;
@@ -41,30 +38,25 @@
       padding: 1rem 2rem;
       z-index: 1000;
     }
-
     nav .logo {
       font-size: 1.5rem;
       font-weight: bold;
       color: var(--accent);
     }
-
     nav ul {
       list-style: none;
       display: flex;
       gap: 1.5rem;
     }
-
     nav a {
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
     }
-
     nav a:hover {
       color: var(--accent);
     }
-
     section {
       min-height: 100vh;
       display: flex;
@@ -76,23 +68,19 @@
       transform: translateY(40px);
       transition: all 0.8s ease-out;
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
     #hero h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
     }
-
     #hero p {
       font-size: 1.2rem;
       max-width: 600px;
       text-align: center;
     }
-
     #projects .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -100,23 +88,19 @@
       margin-top: 2rem;
       width: 100%;
     }
-
     .project {
       background: #1c1c1c;
       padding: 1.5rem;
       border-radius: 10px;
       transition: transform 0.3s;
     }
-
     .project:hover {
       transform: translateY(-5px);
     }
-
     .project h3 {
       margin-bottom: 0.5rem;
       color: var(--accent);
     }
-
     form {
       display: flex;
       flex-direction: column;
@@ -124,7 +108,6 @@
       width: 100%;
       max-width: 400px;
     }
-
     input, textarea {
       padding: 0.8rem;
       border: none;
@@ -132,7 +115,6 @@
       background: #2a2a2a;
       color: white;
     }
-
     button {
       padding: 0.8rem;
       background: var(--accent);
@@ -142,18 +124,15 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     button:hover {
       background: #5752d6;
     }
-
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #999;
     }
-
     /* Success Popup */
     .success-popup {
       position: fixed;
@@ -169,13 +148,11 @@
       transition: all 0.4s ease;
       z-index: 2000;
     }
-
     .success-popup.active {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
       pointer-events: auto;
     }
-
     .success-popup .checkmark {
       width: 80px;
       height: 80px;
@@ -187,7 +164,6 @@
       margin: 0 auto 1rem auto;
       animation: pop 0.4s ease;
     }
-
     .success-popup svg {
       width: 40px;
       height: 40px;
@@ -200,13 +176,7 @@
       stroke-dashoffset: 48;
       animation: draw 0.6s forwards ease-in-out 0.3s;
     }
-
-    @keyframes draw {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-
+    @keyframes draw { to { stroke-dashoffset: 0; } }
     @keyframes pop {
       0% { transform: scale(0); }
       70% { transform: scale(1.2); }
@@ -234,7 +204,7 @@
     <div class="project-grid">
       <div class="project">
         <h3>Project Title</h3>
-        <p>Short description of the project goes here. You can update or duplicate these cards anytime.</p>
+        <p>Short description of the project goes here.</p>
       </div>
     </div>
   </section>
@@ -252,9 +222,7 @@
 
   <div class="success-popup" id="successPopup">
     <div class="checkmark">
-      <svg viewBox="0 0 24 24">
-        <path d="M5 13l4 4L19 7" />
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
     </div>
     <h3>Message Sent!</h3>
     <p>Thank you for contacting me. I'll get back to you soon.</p>
@@ -270,24 +238,27 @@
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, { threshold: 0.2 });
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
 
     document.querySelector('form').addEventListener('submit', function (e) {
-      e.preventDefault(); // Stop default form submission
-      this.reset(); // Clear form
-      successPopup.classList.add('active'); // Show popup
+      e.preventDefault();
+      const formData = new FormData(this);
 
-      setTimeout(() => {
-        successPopup.classList.remove('active');
-      }, 3000); // Hide after 3 seconds
+      fetch('/', {
+        method: 'POST',
+        body: new URLSearchParams(formData).toString(),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(() => {
+        this.reset();
+        successPopup.classList.add('active');
+        setTimeout(() => successPopup.classList.remove('active'), 3000);
+      })
+      .catch(error => alert(error));
     });
   </script>
 </body>
