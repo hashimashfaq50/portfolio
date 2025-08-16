@@ -12,6 +12,11 @@
       --text: #f5f5f5;
       --accent: #6c63ff;
       --success: #28a745;
+      --card-bg: #1c1c1c;
+      --card-hover: #252525;
+      --border: #333;
+      --warning: #ff6b35;
+      --info: #17a2b8;
     }
     * {
       margin: 0;
@@ -81,6 +86,215 @@
       max-width: 600px;
       text-align: center;
     }
+
+    /* Portfolio Section Styles */
+    #portfolio {
+      padding: 8rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    #portfolio h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    
+    #portfolio .subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #999;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .automation-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 2px solid transparent;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .category-card:hover::before {
+      left: 100%;
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      background: var(--card-hover);
+      box-shadow: 0 20px 40px rgba(108, 99, 255, 0.2);
+    }
+
+    .category-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent), #8b7fff);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .category-card:hover .category-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .category-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .category-card p {
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .category-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .category-features li {
+      padding: 0.5rem 0;
+      color: #aaa;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .category-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .category-btn {
+      background: linear-gradient(135deg, var(--accent), #8b7fff);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+    }
+
+    /* Navigation to Why Hire Me */
+    .nav-to-hire {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .hire-nav-btn {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hire-nav-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+    }
+
+    .hire-nav-btn::after {
+      content: '↓';
+      transition: transform 0.3s ease;
+    }
+
+    .hire-nav-btn:hover::after {
+      transform: translateY(3px);
+    }
+
+    /* Why Hire Me Section */
+    #why-hire-me {
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+      border-radius: 20px;
+      margin: 4rem 0;
+      padding: 4rem 2rem;
+    }
+
+    #why-hire-me h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--accent);
+    }
+
+    .hire-reasons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .reason-card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .reason-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Original project grid styles */
     #projects .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -182,6 +396,330 @@
       70% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .automation-categories {
+        grid-template-columns: 1fr;
+      }
+      
+      #portfolio h2 {
+        font-size: 2rem;
+      }
+      
+      .category-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Make.com Simulation Styles */
+    .simulation-container {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      border: 2px solid var(--border);
+    }
+
+    .simulation-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .simulation-header h2 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .workflow-diagram {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+
+    .trigger-section {
+      text-align: center;
+    }
+
+    .webhook-trigger {
+      background: linear-gradient(135deg, var(--accent), #8b7fff);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .webhook-trigger:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+    }
+
+    .webhook-trigger.active {
+      animation: pulse 0.6s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .form-section {
+      background: var(--card-hover);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px dashed var(--border);
+    }
+
+    .form-section h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .email-form input, .email-form select, .email-form textarea {
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .email-form button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .email-form button:hover {
+      background: #5752d6;
+      transform: translateY(-2px);
+    }
+
+    .collectors-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .collector {
+      background: var(--card-hover);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .collector.normal {
+      border-color: var(--info);
+    }
+
+    .collector.urgent {
+      border-color: var(--warning);
+    }
+
+    .collector.active {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .collector h4 {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .collector.normal h4 {
+      color: var(--info);
+    }
+
+    .collector.urgent h4 {
+      color: var(--warning);
+    }
+
+    .collector-content {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .outlook-icon {
+      background: #0078d4;
+    }
+
+    .sheets-icon {
+      background: #34a853;
+    }
+
+    .slack-icon {
+      background: #4a154b;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--accent);
+      animation: flow 2s ease-in-out infinite;
+    }
+
+    @keyframes flow {
+      0%, 100% { opacity: 0.5; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(5px); }
+    }
+
+    .filters-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .filters-section h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .filter {
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .filter h4 {
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .filter p {
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* AI Message Popup */
+    .ai-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, var(--accent), #8b7fff);
+      color: white;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2000;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .ai-message.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .ai-message .ai-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .ai-message h3 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .ai-message p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Animation for data flow */
+    .data-flow::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: dataFlow 2s ease-in-out;
+    }
+
+    @keyframes dataFlow {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .automation-categories {
+        grid-template-columns: 1fr;
+      }
+      
+      #portfolio h2 {
+        font-size: 2rem;
+      }
+      
+      .category-card {
+        padding: 1.5rem;
+      }
+      .workflow-diagram {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .collector-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .container {
+        padding: 6rem 1rem 2rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -189,7 +727,7 @@
     <div class="logo">Hashim</div>
     <ul>
       <li><a href="#hero">Home</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -199,12 +737,205 @@
     <p>A passionate developer aiming to build smooth, clean & interactive web experiences.</p>
   </section>
 
-  <section id="projects">
-    <h2>My Projects</h2>
-    <div class="project-grid">
-      <div class="project">
-        <h3>Project Title</h3>
-        <p>Short description of the project goes here.</p>
+  <!-- New Portfolio Section -->
+  <section id="portfolio">
+    <h2>Automation Portfolio</h2>
+    <p class="subtitle">Explore my automation projects across different complexity levels, from basic workflows to advanced enterprise solutions.</p>
+    
+    <div class="automation-categories">
+      <!-- Basic Category -->
+      <div class="category-card" onclick="showCategoryContent('basic')">
+        <div class="category-icon">🚀</div>
+        <h3>Basic Automation</h3>
+        <p>Simple yet powerful automation workflows perfect for small businesses and personal productivity.</p>
+        <ul class="category-features">
+          <li>Email automation workflows</li>
+          <li>Form data collection</li>
+          <li>Basic integrations</li>
+          <li>Notification systems</li>
+        </ul>
+        <button class="category-btn">Explore Basic Projects</button>
+      </div>
+
+      <!-- Intermediate Category -->
+      <div class="category-card" onclick="showCategoryContent('intermediate')">
+        <div class="category-icon">⚡</div>
+        <h3>Intermediate Automation</h3>
+        <p>More complex workflows involving multiple platforms and conditional logic for growing businesses.</p>
+        <ul class="category-features">
+          <li>Multi-platform integrations</li>
+          <li>Conditional workflows</li>
+          <li>Data transformation</li>
+          <li>Advanced notifications</li>
+        </ul>
+        <button class="category-btn">Explore Intermediate Projects</button>
+      </div>
+
+      <!-- Advanced Category -->
+      <div class="category-card" onclick="showCategoryContent('advanced')">
+        <div class="category-icon">🔥</div>
+        <h3>Advanced Automation</h3>
+        <p>Enterprise-level automation solutions with complex logic, AI integration, and scalable architectures.</p>
+        <ul class="category-features">
+          <li>AI-powered workflows</li>
+          <li>Enterprise integrations</li>
+          <li>Custom API development</li>
+          <li>Scalable solutions</li>
+        </ul>
+        <button class="category-btn">Explore Advanced Projects</button>
+      </div>
+    </div>
+
+    <!-- Navigation to Why Hire Me -->
+    <div class="nav-to-hire">
+      <button class="hire-nav-btn" onclick="scrollToHireMe()">Why Hire Me?</button>
+    </div>
+  </section>
+
+  <!-- Category Content Sections (hidden by default) -->
+  <section id="basic-automation-content" class="category-content" style="display: none;">
+    <div class="container">
+      <div class="page-header">
+        <h1>Basic Automation Projects</h1>
+        <p>Simple yet powerful automation workflows that streamline everyday tasks and boost productivity.</p>
+      </div>
+
+      <!-- Interactive Make.com Simulation -->
+      <div class="simulation-container">
+        <div class="simulation-header">
+          <h2>🔄 Interactive Make.com Email Automation</h2>
+          <p>Experience how AI automation intelligently routes emails based on priority</p>
+        </div>
+
+        <div class="workflow-diagram">
+          <!-- Webhook Trigger -->
+          <div class="trigger-section">
+            <div class="webhook-trigger" id="webhookTrigger">
+              <h3>📧 Webhook Trigger</h3>
+              <p>Click to start automation</p>
+            </div>
+          </div>
+
+          <!-- Form Collection -->
+          <div class="form-section">
+            <h3>📝 Email Form Collection</h3>
+            <form class="email-form" id="emailForm">
+              <input type="email" placeholder="From Email" required>
+              <input type="text" placeholder="Subject" required>
+              <select id="prioritySelect" required>
+                <option value="">Select Priority</option>
+                <option value="normal">Normal</option>
+                <option value="urgent">Urgent</option>
+              </select>
+              <textarea placeholder="Message content" rows="3" required></textarea>
+              <button type="submit">Submit Email</button>
+            </form>
+          </div>
+
+          <!-- Collectors -->
+          <div class="collectors-section">
+            <!-- Normal Mails Collector (Upper) -->
+            <div class="collector normal" id="normalCollector">
+              <h4>📬 Normal Mails Collector</h4>
+              <div class="collector-content">
+                <div class="service-icon outlook-icon">📧</div>
+                <span class="flow-arrow">→</span>
+                <div>
+                  <strong>Outlook</strong><br>
+                  <small>Sends email notification</small>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="service-icon sheets-icon">📊</div>
+                <div>
+                  <strong>Google Sheets</strong><br>
+                  <small>Logs normal responses</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Urgent Mails Collector (Lower) -->
+            <div class="collector urgent" id="urgentCollector">
+              <h4>🚨 Urgent Mails Collector</h4>
+              <div class="collector-content">
+                <div class="service-icon sheets-icon">📊</div>
+                <div>
+                  <strong>Google Sheets</strong><br>
+                  <small>Urgent collector</small>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="service-icon slack-icon">💬</div>
+                <div>
+                  <strong>Slack</strong><br>
+                  <small>Urgent channel alert</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+          <h3>🔍 Smart Filters</h3>
+          <div class="filters">
+            <div class="filter">
+              <h4>Normal Mails Filter</h4>
+              <p>Routes only normal priority emails to standard workflow</p>
+            </div>
+            <div class="filter">
+              <h4>Urgent Mails Filter</h4>
+              <p>Captures urgent, critical, and emergency emails for immediate attention</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Message Popup -->
+      <div class="ai-message" id="aiMessage">
+        <div class="ai-icon">🤖</div>
+        <h3>Look, AI Automation handled the rest!</h3>
+        <p>Your email was intelligently processed and routed to the right workflow. No manual intervention needed!</p>
+      </div>
+
+      <!-- Removed Additional Project Examples -->
+    </div>
+  </section>
+
+  <section id="intermediate-automation-content" class="category-content" style="display: none;">
+    <div class="container">
+      <div class="icon">⚡</div>
+      <h1>Intermediate Automation</h1>
+      <p>This section will showcase more complex automation workflows involving multiple platforms, conditional logic, and advanced integrations for growing businesses.</p>
+      <p><strong>Coming Soon:</strong> Multi-platform CRM integrations, advanced data transformation workflows, and intelligent notification systems.</p>
+    </div>
+  </section>
+
+  <section id="advanced-automation-content" class="category-content" style="display: none;">
+    <div class="container">
+      <div class="icon">🔥</div>
+      <h1>Advanced Automation</h1>
+      <p>This section will feature enterprise-level automation solutions with complex logic, AI integration, and scalable architectures for large organizations.</p>
+      <p><strong>Coming Soon:</strong> AI-powered workflows, custom API development, enterprise integrations, and machine learning automation pipelines.</p>
+    </div>
+  </section>
+
+  <!-- Why Hire Me Section -->
+  <section id="why-hire-me">
+    <h2>Why Hire Me?</h2>
+    <div class="hire-reasons">
+      <div class="reason-card">
+        <div class="reason-icon">💡</div>
+        <h3>Innovation First</h3>
+        <p>I bring creative solutions to complex automation challenges, always thinking outside the box.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">🎯</div>
+        <h3>Results Driven</h3>
+        <p>Every automation I build is designed to save time, reduce errors, and increase productivity.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">🔧</div>
+        <h3>Technical Excellence</h3>
+        <p>Deep expertise in modern automation tools and platforms with a focus on scalable solutions.</p>
       </div>
     </div>
   </section>
@@ -236,6 +967,7 @@
     const sections = document.querySelectorAll("section");
     const successPopup = document.getElementById("successPopup");
 
+    // Intersection Observer for scroll animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -244,6 +976,7 @@
 
     sections.forEach(section => observer.observe(section));
 
+    // Form submission handler
     document.querySelector('form').addEventListener('submit', function (e) {
       e.preventDefault();
       const formData = new FormData(this);
@@ -260,6 +993,114 @@
       })
       .catch(error => alert(error));
     });
+
+    // Navigation functions
+    function showCategoryContent(category) {
+      document.querySelectorAll('.category-content').forEach(content => {
+        content.style.display = 'none';
+      });
+      document.getElementById(`${category}-automation-content`).style.display = 'flex';
+      document.getElementById(`${category}-automation-content`).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    function scrollToHireMe() {
+      document.getElementById('why-hire-me').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+
+    // Add some interactive effects
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add stagger animation to category cards
+      const categoryCards = document.querySelectorAll('.category-card');
+      categoryCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.2}s`;
+      });
+
+      // Make.com simulation specific JS
+      const webhookTrigger = document.getElementById('webhookTrigger');
+      const emailForm = document.getElementById('emailForm');
+      const normalCollector = document.getElementById('normalCollector');
+      const urgentCollector = document.getElementById('urgentCollector');
+      const aiMessage = document.getElementById('aiMessage');
+      const prioritySelect = document.getElementById('prioritySelect');
+
+      if (webhookTrigger && emailForm && normalCollector && urgentCollector && aiMessage && prioritySelect) {
+        // Webhook trigger animation
+        webhookTrigger.addEventListener('click', function() {
+          this.classList.add('active');
+          setTimeout(() => this.classList.remove('active'), 600);
+        });
+
+        // Form submission handler
+        emailForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const priority = prioritySelect.value;
+          
+          // Trigger webhook animation
+          webhookTrigger.classList.add('active');
+          
+          setTimeout(() => {
+            // Determine which collector to activate based on priority
+            if (priority === 'normal') {
+              normalCollector.classList.add('active', 'data-flow');
+              setTimeout(() => {
+                normalCollector.classList.remove('active', 'data-flow');
+                showAIMessage();
+              }, 2000);
+            } else {
+              // urgent, critical, emergency all go to urgent collector
+              urgentCollector.classList.add('active', 'data-flow');
+              setTimeout(() => {
+                urgentCollector.classList.remove('active', 'data-flow');
+                showAIMessage();
+              }, 2000);
+            }
+            
+            // Reset form
+            this.reset();
+          }, 600);
+        });
+
+        function showAIMessage() {
+          aiMessage.classList.add('show');
+          setTimeout(() => {
+            aiMessage.classList.remove('show');
+          }, 4000);
+        }
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.collector').forEach(collector => {
+          collector.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+          });
+          
+          collector.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('active')) {
+              this.style.transform = 'scale(1)';
+            }
+          });
+        });
+
+        // Add entrance animations
+        const elements = document.querySelectorAll('.collector, .filter, .webhook-trigger');
+        elements.forEach((el, index) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            el.style.transition = 'all 0.6s ease';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+      }
+    });
   </script>
 </body>
 </html>
+
