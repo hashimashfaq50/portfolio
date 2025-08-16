@@ -47,6 +47,7 @@
       font-size: 1.5rem;
       font-weight: bold;
       color: var(--accent);
+      cursor: pointer;
     }
     nav ul {
       list-style: none;
@@ -58,10 +59,28 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
+      cursor: pointer;
     }
     nav a:hover {
       color: var(--accent);
     }
+    nav a.active {
+      color: var(--accent);
+    }
+
+    /* Page sections */
+    .page {
+      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .page.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     section {
       min-height: 100vh;
       display: flex;
@@ -85,6 +104,104 @@
       font-size: 1.2rem;
       max-width: 600px;
       text-align: center;
+    }
+
+    /* About Me Button Styles */
+    .about-me-btn {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      text-decoration: none;
+    }
+
+    .about-me-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+    }
+
+    .about-me-btn::after {
+      content: '→';
+      transition: transform 0.3s ease;
+    }
+
+    .about-me-btn:hover::after {
+      transform: translateX(3px);
+    }
+
+    /* About Me Page Styles */
+    .about-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-container h1 {
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .about-container p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      color: var(--text);
+      text-align: left;
+      max-width: 700px;
+    }
+
+    /* Home Button Styles */
+    .home-btn {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+
+    .home-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+    }
+
+    .home-btn::before {
+      content: '←';
+      transition: transform 0.3s ease;
+    }
+
+    .home-btn:hover::before {
+      transform: translateX(-3px);
     }
 
     /* Portfolio Section Styles */
@@ -397,21 +514,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .automation-categories {
-        grid-template-columns: 1fr;
-      }
-      
-      #portfolio h2 {
-        font-size: 2rem;
-      }
-      
-      .category-card {
-        padding: 1.5rem;
-      }
-    }
-
     /* Make.com Simulation Styles */
     .simulation-container {
       background: var(--card-bg);
@@ -719,388 +821,451 @@
       .container {
         padding: 6rem 1rem 2rem;
       }
+
+      .about-container {
+        padding: 6rem 1rem 2rem;
+      }
+      
+      .about-container h1 {
+        font-size: 2.5rem;
+      }
+      
+      .about-container p {
+        font-size: 1.1rem;
+        text-align: center;
+      }
+      
+      nav {
+        padding: 1rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
     }
+
+    @media (max-width: 480px) {
+      .about-container h1 {
+        font-size: 2rem;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      
+      nav a {
+        font-size: 0.9rem;
+      }
+    }
+    
+   .cta-text {
+  font-size: 70px;
+  color: #6C63FF;
+  margin-top: 15px;
+  line-height: 1.8;
+}
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo">Hashim</div>
+    <div class="logo" onclick="showPage('home')">Hashim</div>
     <ul>
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a onclick="scrollToSection('portfolio')" id="nav-portfolio">Portfolio</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About Me</a></li>
+      <li><a onclick="scrollToSection('contact')" id="nav-contact">Contact</a></li>
     </ul>
   </nav>
 
-  <section id="hero">
-    <h1>Hi, I'm Hashim</h1>
-    <p>A passionate developer aiming to build smooth, clean & interactive web experiences.</p>
-  </section>
+  <!-- Home Page -->
+  <div id="home-page" class="page active">
+    <section id="hero">
+      <h1>Hi! I am Hashim</h1>
+       <p class="cta-text">
+          Scroll down to see my automation portfolio <br>
+          or click the button to know
+      </p>
+      <button class="about-me-btn" onclick="showPage('about')">About Me</button>
+    </section>
 
-  <!-- New Portfolio Section -->
-  <section id="portfolio">
-    <h2>Automation Portfolio</h2>
-    <p class="subtitle">Explore my automation projects across different complexity levels, from basic workflows to advanced enterprise solutions.</p>
-    
-    <div class="automation-categories">
-      <!-- Basic Category -->
-      <div class="category-card" onclick="showCategoryContent('basic')">
-        <div class="category-icon">🚀</div>
-        <h3>Basic Automation</h3>
-        <p>Simple yet powerful automation workflows perfect for small businesses and personal productivity.</p>
-        <ul class="category-features">
-          <li>Email automation workflows</li>
-          <li>Form data collection</li>
-          <li>Basic integrations</li>
-          <li>Notification systems</li>
-        </ul>
-        <button class="category-btn">Explore Basic Projects</button>
+    <!-- New Portfolio Section -->
+    <section id="portfolio">
+      <h2>Automation Portfolio</h2>
+      <p class="subtitle">Explore my automation projects across different complexity levels, from basic workflows to advanced enterprise solutions.</p>
+      
+      <div class="automation-categories">
+        <!-- Basic Category -->
+        <div class="category-card" onclick="showCategoryContent('basic')">
+          <div class="category-icon">🚀</div>
+          <h3>Basic Automation</h3>
+          <p>Simple yet effective automations that save time and reduce manual work. Perfect for individuals and small teams.</p>
+          <ul class="category-features">
+            <li>Email notifications & alerts</li>
+            <li>Data collection & organization</li>
+            <li>Social media posting</li>
+            <li>File management & backup</li>
+          </ul>
+          <button class="category-btn">View Basic Projects</button>
+        </div>
+
+        <!-- Intermediate Category -->
+        <div class="category-card" onclick="showCategoryContent('intermediate')">
+          <div class="category-icon">⚡</div>
+          <h3>Intermediate Automation</h3>
+          <p>Multi-step workflows with conditional logic and integrations. Ideal for growing businesses and complex processes.</p>
+          <ul class="category-features">
+            <li>CRM data synchronization</li>
+            <li>Lead qualification & routing</li>
+            <li>Inventory management</li>
+            <li>Customer support workflows</li>
+          </ul>
+          <button class="category-btn">View Intermediate Projects</button>
+        </div>
+
+        <!-- Advanced Category -->
+        <div class="category-card" onclick="showCategoryContent('advanced')">
+          <div class="category-icon">🔥</div>
+          <h3>Advanced Automation</h3>
+          <p>Enterprise-grade solutions with AI integration, complex decision trees, and seamless multi-platform orchestration.</p>
+          <ul class="category-features">
+            <li>AI-powered data analysis</li>
+            <li>Multi-system integrations</li>
+            <li>Custom API development</li>
+            <li>Scalable enterprise workflows</li>
+          </ul>
+          <button class="category-btn">View Advanced Projects</button>
+        </div>
       </div>
 
-      <!-- Intermediate Category -->
-      <div class="category-card" onclick="showCategoryContent('intermediate')">
-        <div class="category-icon">⚡</div>
-        <h3>Intermediate Automation</h3>
-        <p>More complex workflows involving multiple platforms and conditional logic for growing businesses.</p>
-        <ul class="category-features">
-          <li>Multi-platform integrations</li>
-          <li>Conditional workflows</li>
-          <li>Data transformation</li>
-          <li>Advanced notifications</li>
-        </ul>
-        <button class="category-btn">Explore Intermediate Projects</button>
+      <!-- Navigation to Why Hire Me -->
+      <div class="nav-to-hire">
+        <button class="hire-nav-btn" onclick="document.getElementById('why-hire-me').scrollIntoView({behavior: 'smooth'})">
+          Why Hire Me?
+        </button>
       </div>
 
-      <!-- Advanced Category -->
-      <div class="category-card" onclick="showCategoryContent('advanced')">
-        <div class="category-icon">🔥</div>
-        <h3>Advanced Automation</h3>
-        <p>Enterprise-level automation solutions with complex logic, AI integration, and scalable architectures.</p>
-        <ul class="category-features">
-          <li>AI-powered workflows</li>
-          <li>Enterprise integrations</li>
-          <li>Custom API development</li>
-          <li>Scalable solutions</li>
-        </ul>
-        <button class="category-btn">Explore Advanced Projects</button>
-      </div>
-    </div>
-
-    <!-- Navigation to Why Hire Me -->
-    <div class="nav-to-hire">
-      <button class="hire-nav-btn" onclick="scrollToHireMe()">Why Hire Me?</button>
-    </div>
-  </section>
-
-  <!-- Category Content Sections (hidden by default) -->
-  <section id="basic-automation-content" class="category-content" style="display: none;">
-    <div class="container">
-      <div class="page-header">
-        <h1>Basic Automation Projects</h1>
-        <p>Simple yet powerful automation workflows that streamline everyday tasks and boost productivity.</p>
+      <!-- Why Hire Me Section -->
+      <div id="why-hire-me">
+        <h2>Why Hire Me?</h2>
+        <div class="hire-reasons">
+          <div class="reason-card">
+            <div class="reason-icon">🎯</div>
+            <h3>Results-Driven</h3>
+            <p>I focus on delivering measurable outcomes that directly impact your business goals and bottom line.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon">🚀</div>
+            <h3>Fast Implementation</h3>
+            <p>Quick turnaround times without compromising quality. Your automations will be up and running in no time.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon">🔧</div>
+            <h3>Custom Solutions</h3>
+            <p>Every automation is tailored to your specific needs and workflow requirements.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon">📈</div>
+            <h3>Scalable Systems</h3>
+            <p>Build automations that grow with your business and adapt to changing needs.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon">🎓</div>
+            <h3>Knowledge Transfer</h3>
+            <p>I ensure you understand how your automations work and can manage them independently.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon">🤝</div>
+            <h3>Ongoing Support</h3>
+            <p>Continuous support and optimization to ensure your automations perform at their best.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Interactive Make.com Simulation -->
       <div class="simulation-container">
         <div class="simulation-header">
-          <h2>🔄 Interactive Make.com Email Automation</h2>
-          <p>Experience how AI automation intelligently routes emails based on priority</p>
+          <h2>🤖 Live Automation Demo</h2>
+          <p>Experience how automation works! Fill out the form below and watch the magic happen.</p>
         </div>
 
         <div class="workflow-diagram">
-          <!-- Webhook Trigger -->
           <div class="trigger-section">
-            <div class="webhook-trigger" id="webhookTrigger">
-              <h3>📧 Webhook Trigger</h3>
-              <p>Click to start automation</p>
+            <div class="webhook-trigger" id="webhook">
+              <h3>📡 Webhook Trigger</h3>
+              <p>Waiting for form submission...</p>
             </div>
           </div>
 
-          <!-- Form Collection -->
           <div class="form-section">
-            <h3>📝 Email Form Collection</h3>
-            <form class="email-form" id="emailForm">
-              <input type="email" placeholder="From Email" required>
-              <input type="text" placeholder="Subject" required>
-              <select id="prioritySelect" required>
+            <h3>📝 Contact Form</h3>
+            <form class="email-form" id="demoForm">
+              <input type="text" placeholder="Your Name" required>
+              <input type="email" placeholder="Your Email" required>
+              <select required>
                 <option value="">Select Priority</option>
                 <option value="normal">Normal</option>
                 <option value="urgent">Urgent</option>
               </select>
-              <textarea placeholder="Message content" rows="3" required></textarea>
-              <button type="submit">Submit Email</button>
+              <textarea placeholder="Your Message" rows="3" required></textarea>
+              <button type="submit">🚀 Submit & Watch Automation</button>
             </form>
           </div>
 
-          <!-- Collectors -->
           <div class="collectors-section">
-            <!-- Normal Mails Collector (Upper) -->
             <div class="collector normal" id="normalCollector">
-              <h4>📬 Normal Mails Collector</h4>
+              <h4>📧 Normal Priority</h4>
               <div class="collector-content">
                 <div class="service-icon outlook-icon">📧</div>
                 <span class="flow-arrow">→</span>
-                <div>
-                  <strong>Outlook</strong><br>
-                  <small>Sends email notification</small>
-                </div>
-                <span class="flow-arrow">→</span>
                 <div class="service-icon sheets-icon">📊</div>
-                <div>
-                  <strong>Google Sheets</strong><br>
-                  <small>Logs normal responses</small>
-                </div>
+                <span>Email + Sheets</span>
               </div>
             </div>
-
-            <!-- Urgent Mails Collector (Lower) -->
+            
             <div class="collector urgent" id="urgentCollector">
-              <h4>🚨 Urgent Mails Collector</h4>
+              <h4>🚨 Urgent Priority</h4>
               <div class="collector-content">
+                <div class="service-icon outlook-icon">📧</div>
+                <span class="flow-arrow">→</span>
                 <div class="service-icon sheets-icon">📊</div>
-                <div>
-                  <strong>Google Sheets</strong><br>
-                  <small>Urgent collector</small>
-                </div>
                 <span class="flow-arrow">→</span>
                 <div class="service-icon slack-icon">💬</div>
-                <div>
-                  <strong>Slack</strong><br>
-                  <small>Urgent channel alert</small>
-                </div>
+                <span>Email + Sheets + Slack</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Filters Section -->
         <div class="filters-section">
-          <h3>🔍 Smart Filters</h3>
+          <h3>🔍 Smart Filters & Routing</h3>
           <div class="filters">
             <div class="filter">
-              <h4>Normal Mails Filter</h4>
-              <p>Routes only normal priority emails to standard workflow</p>
+              <h4>Priority Detection</h4>
+              <p>Automatically routes based on urgency level</p>
             </div>
             <div class="filter">
-              <h4>Urgent Mails Filter</h4>
-              <p>Captures urgent, critical, and emergency emails for immediate attention</p>
+              <h4>Data Validation</h4>
+              <p>Ensures all required fields are complete</p>
+            </div>
+            <div class="filter">
+              <h4>Duplicate Prevention</h4>
+              <p>Prevents duplicate entries in your systems</p>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- AI Message Popup -->
-      <div class="ai-message" id="aiMessage">
-        <div class="ai-icon">🤖</div>
-        <h3>Look, AI Automation handled the rest!</h3>
-        <p>Your email was intelligently processed and routed to the right workflow. No manual intervention needed!</p>
-      </div>
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <form id="contactForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
 
-      <!-- Removed Additional Project Examples -->
-    </div>
-  </section>
-
-  <section id="intermediate-automation-content" class="category-content" style="display: none;">
-    <div class="container">
-      <div class="icon">⚡</div>
-      <h1>Intermediate Automation</h1>
-      <p>This section will showcase more complex automation workflows involving multiple platforms, conditional logic, and advanced integrations for growing businesses.</p>
-      <p><strong>Coming Soon:</strong> Multi-platform CRM integrations, advanced data transformation workflows, and intelligent notification systems.</p>
-    </div>
-  </section>
-
-  <section id="advanced-automation-content" class="category-content" style="display: none;">
-    <div class="container">
-      <div class="icon">🔥</div>
-      <h1>Advanced Automation</h1>
-      <p>This section will feature enterprise-level automation solutions with complex logic, AI integration, and scalable architectures for large organizations.</p>
-      <p><strong>Coming Soon:</strong> AI-powered workflows, custom API development, enterprise integrations, and machine learning automation pipelines.</p>
-    </div>
-  </section>
-
-  <!-- Why Hire Me Section -->
-  <section id="why-hire-me">
-    <h2>Why Hire Me?</h2>
-    <div class="hire-reasons">
-      <div class="reason-card">
-        <div class="reason-icon">💡</div>
-        <h3>Innovation First</h3>
-        <p>I bring creative solutions to complex automation challenges, always thinking outside the box.</p>
-      </div>
-      <div class="reason-card">
-        <div class="reason-icon">🎯</div>
-        <h3>Results Driven</h3>
-        <p>Every automation I build is designed to save time, reduce errors, and increase productivity.</p>
-      </div>
-      <div class="reason-card">
-        <div class="reason-icon">🔧</div>
-        <h3>Technical Excellence</h3>
-        <p>Deep expertise in modern automation tools and platforms with a focus on scalable solutions.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <form name="contact" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact" />
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
-  <div class="success-popup" id="successPopup">
-    <div class="checkmark">
-      <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
-    </div>
-    <h3>Message Sent!</h3>
-    <p>Thank you for contacting me. I'll get back to you soon.</p>
+    <footer>
+      <p>&copy; 2024 Hashim Ashfaq. All rights reserved.</p>
+    </footer>
   </div>
 
-  <footer>
-    &copy; 2025 Hashim Ashfaq. All rights reserved.
-  </footer>
+  <!-- About Me Page -->
+  <div id="about-page" class="page">
+    <div class="about-container">
+      <h1>Hi! I'm Hashim Ashfaq</h1>
+      <p>
+        an AI automation specialist passionate about making workflows smarter and businesses more efficient. I use AI tools to automate repetitive tasks, streamline processes, and bring ideas to life without writing a single line of code.
+      </p>
+      <p>
+        I thrive on solving problems creatively, designing seamless automations, and turning complex tasks into simple, effortless experiences. My goal is to help people and organizations save time, reduce errors, and focus on what truly matters—all through the power of AI.
+      </p>
+      <p>
+        Curious, proactive, and results-driven, I love experimenting with new AI tools and building automation systems that are both practical and impressive.
+      </p>
+      <button class="home-btn" onclick="showPage('home')">Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Success Popup -->
+  <div class="success-popup" id="successPopup">
+    <div class="checkmark">
+      <svg viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+    </div>
+    <h3>Message Sent Successfully!</h3>
+    <p>Thank you for reaching out. I'll get back to you soon.</p>
+  </div>
+
+  <!-- AI Message Popup -->
+  <div class="ai-message" id="aiMessage">
+    <div class="ai-icon">🤖</div>
+    <h3>Automation Triggered!</h3>
+    <p>Your form data has been processed and routed automatically.</p>
+  </div>
 
   <script>
-    const sections = document.querySelectorAll("section");
-    const successPopup = document.getElementById("successPopup");
-
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
+    // Page navigation
+    function showPage(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => {
+        page.classList.remove('active');
       });
-    }, { threshold: 0.2 });
+      
+      // Show selected page
+      const targetPage = document.getElementById(pageId + '-page');
+      if (targetPage) {
+        targetPage.classList.add('active');
+        
+        // Update navigation active state
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        const activeNav = document.getElementById('nav-' + pageId);
+        if (activeNav) {
+          activeNav.classList.add('active');
+        }
+        
+        // Update page title
+        if (pageId === 'about') {
+          document.title = 'About Me - Hashim\'s Portfolio';
+        } else {
+          document.title = 'Hashim\'s Portfolio';
+        }
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+        
+        // Trigger animations for visible sections
+        setTimeout(() => {
+          const visibleSections = targetPage.querySelectorAll('section, .about-container');
+          visibleSections.forEach(section => {
+            section.classList.add('visible');
+          });
+        }, 100);
+      }
+    }
 
-    sections.forEach(section => observer.observe(section));
+    // Scroll to section within home page
+    function scrollToSection(sectionId) {
+      // First ensure we're on the home page
+      showPage('home');
+      
+      // Then scroll to the section
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          
+          // Update navigation active state
+          const navLinks = document.querySelectorAll('nav a');
+          navLinks.forEach(link => link.classList.remove('active'));
+          
+          const activeNav = document.getElementById('nav-' + sectionId);
+          if (activeNav) {
+            activeNav.classList.add('active');
+          }
+        }
+      }, 100);
+    }
 
-    // Form submission handler
-    document.querySelector('form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const formData = new FormData(this);
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Show home page by default
+      showPage('home');
+      
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      });
 
-      fetch('/', {
-        method: 'POST',
-        body: new URLSearchParams(formData).toString(),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .then(() => {
-        this.reset();
-        successPopup.classList.add('active');
-        setTimeout(() => successPopup.classList.remove('active'), 3000);
-      })
-      .catch(error => alert(error));
+      document.querySelectorAll('section, .about-container').forEach(section => {
+        observer.observe(section);
+      });
     });
 
-    // Navigation functions
-    function showCategoryContent(category) {
-      document.querySelectorAll('.category-content').forEach(content => {
-        content.style.display = 'none';
-      });
-      document.getElementById(`${category}-automation-content`).style.display = 'flex';
-      document.getElementById(`${category}-automation-content`).scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show success popup
+      const popup = document.getElementById('successPopup');
+      popup.classList.add('active');
+      
+      // Hide popup after 3 seconds
+      setTimeout(() => {
+        popup.classList.remove('active');
+      }, 3000);
+      
+      // Reset form
+      this.reset();
+    });
 
-    function scrollToHireMe() {
-      document.getElementById('why-hire-me').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }
-
-    // Add some interactive effects
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add stagger animation to category cards
-      const categoryCards = document.querySelectorAll('.category-card');
-      categoryCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.2}s`;
-      });
-
-      // Make.com simulation specific JS
-      const webhookTrigger = document.getElementById('webhookTrigger');
-      const emailForm = document.getElementById('emailForm');
+    // Demo form automation simulation
+    document.getElementById('demoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const priority = this.querySelector('select').value;
+      const webhook = document.getElementById('webhook');
       const normalCollector = document.getElementById('normalCollector');
       const urgentCollector = document.getElementById('urgentCollector');
       const aiMessage = document.getElementById('aiMessage');
-      const prioritySelect = document.getElementById('prioritySelect');
-
-      if (webhookTrigger && emailForm && normalCollector && urgentCollector && aiMessage && prioritySelect) {
-        // Webhook trigger animation
-        webhookTrigger.addEventListener('click', function() {
-          this.classList.add('active');
-          setTimeout(() => this.classList.remove('active'), 600);
-        });
-
-        // Form submission handler
-        emailForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const priority = prioritySelect.value;
-          
-          // Trigger webhook animation
-          webhookTrigger.classList.add('active');
-          
-          setTimeout(() => {
-            // Determine which collector to activate based on priority
-            if (priority === 'normal') {
-              normalCollector.classList.add('active', 'data-flow');
-              setTimeout(() => {
-                normalCollector.classList.remove('active', 'data-flow');
-                showAIMessage();
-              }, 2000);
-            } else {
-              // urgent, critical, emergency all go to urgent collector
-              urgentCollector.classList.add('active', 'data-flow');
-              setTimeout(() => {
-                urgentCollector.classList.remove('active', 'data-flow');
-                showAIMessage();
-              }, 2000);
-            }
-            
-            // Reset form
-            this.reset();
-          }, 600);
-        });
-
-        function showAIMessage() {
-          aiMessage.classList.add('show');
-          setTimeout(() => {
-            aiMessage.classList.remove('show');
-          }, 4000);
+      
+      // Trigger webhook animation
+      webhook.classList.add('active');
+      webhook.innerHTML = '<h3>📡 Processing...</h3><p>Form data received!</p>';
+      
+      setTimeout(() => {
+        // Activate appropriate collector
+        if (priority === 'urgent') {
+          urgentCollector.classList.add('active');
+          urgentCollector.classList.add('data-flow');
+        } else {
+          normalCollector.classList.add('active');
+          normalCollector.classList.add('data-flow');
         }
+        
+        // Show AI message
+        aiMessage.classList.add('show');
+        
+        // Reset after animation
+        setTimeout(() => {
+          webhook.classList.remove('active');
+          webhook.innerHTML = '<h3>📡 Webhook Trigger</h3><p>Waiting for form submission...</p>';
+          normalCollector.classList.remove('active', 'data-flow');
+          urgentCollector.classList.remove('active', 'data-flow');
+          aiMessage.classList.remove('show');
+          this.reset();
+        }, 3000);
+      }, 1000);
+    });
 
-        // Add some interactive hover effects
-        document.querySelectorAll('.collector').forEach(collector => {
-          collector.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.02)';
-          });
-          
-          collector.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('active')) {
-              this.style.transform = 'scale(1)';
-            }
-          });
-        });
+    // Category content functions (placeholder)
+    function showCategoryContent(category) {
+      alert(`${category.charAt(0).toUpperCase() + category.slice(1)} automation projects coming soon!`);
+    }
 
-        // Add entrance animations
-        const elements = document.querySelectorAll('.collector, .filter, .webhook-trigger');
-        elements.forEach((el, index) => {
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(20px)';
-          setTimeout(() => {
-            el.style.transition = 'all 0.6s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          }, index * 100);
-        });
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(e) {
+      if (e.state && e.state.page) {
+        showPage(e.state.page);
       }
     });
+
+    // Update browser history when navigating
+    const originalShowPage = showPage;
+    showPage = function(pageId) {
+      originalShowPage(pageId);
+      history.pushState({page: pageId}, '', pageId === 'home' ? '/' : '/' + pageId);
+    };
   </script>
 </body>
 </html>
-
